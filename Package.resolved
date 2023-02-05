@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "inoreaderswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JosephPAntonetti/InoreaderSwift.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3edce3a1a01c8cae0efc1274dfe3d03da4f77043"
+      }
+    }
+  ],
+  "version" : 2
+}
