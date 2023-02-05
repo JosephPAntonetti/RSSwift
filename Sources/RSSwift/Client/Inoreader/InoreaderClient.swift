@@ -13,8 +13,13 @@ class InoreaderClient: RssClient {
     }
 
     func getSubscriptions() async -> [SubscriptionModel] {
-        // TODO:
-        return []
+        let result = await api.getSubscriptions()
+        switch result {
+        case let .success(subscriptions):
+            return subscriptions.map { SubscriptionModel(inoreaderSubscription: $0) }
+        case .failure:
+            return []
+        }
     }
 
     func getArticlesForFeed(feedId: String) async -> [ArticleModel] {

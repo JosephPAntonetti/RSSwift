@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/JosephPAntonetti/InoreaderSwift.git",
       "state" : {
-        "revision" : "23e26b300270a97756455ca2ba7a53a96577c49c",
-        "version" : "1.0.0"
+        "revision" : "d3087d9035acc716d247f3ece4514db2e39b254a",
+        "version" : "1.0.1"
       }
     }
   ],
