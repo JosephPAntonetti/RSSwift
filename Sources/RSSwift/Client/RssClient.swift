@@ -1,15 +1,15 @@
-//
-//  RssClient.swift
-//  
-//
-//  Created by Joseph Antonetti on 2/5/23.
-//
+/*
+    Underlying DataProvider for this library.
 
-import Foundation
+    This interface returns a set of cacheable models, which are used by the application.
 
+    This interface should not be used directly unless implementing your own data source!
+*/
 protocol RssClient {
-    
-    func getFeeds() async -> [any Feed]
-    func getFolders() async -> [any Folder]
+
+  func getFolders() async -> [FolderModel]
+  func getSubscriptions() async -> [SubscriptionModel]
+  func getArticlesForFeed(feedId: String) async -> [ArticleModel]
+  func getSubscriptionsForFolder(folderId: String) async -> [SubscriptionModel]
 
 }
