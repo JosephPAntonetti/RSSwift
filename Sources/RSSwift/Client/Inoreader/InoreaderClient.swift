@@ -8,8 +8,13 @@ class InoreaderClient: RssClient {
     }
 
     func getFolders() async -> [FolderModel] {
-        // TODO:
-        return []
+        let result = await api.getFolders()
+        switch result {
+        case let .success(folders):
+            return folders.map { FolderModel(tagOrFolder: $0) }
+        case .failure:
+            return []
+        }
     }
 
     func getSubscriptions() async -> [SubscriptionModel] {
