@@ -1,4 +1,4 @@
-class Folder: Feed {
+public class Folder: Feed {
 
   private let folderModel: FolderModel
 
@@ -7,7 +7,7 @@ class Folder: Feed {
     super.init(id: folderModel.id, name: folderModel.name, client: client)
   }
 
-  func getSubscriptions() async -> [Subscription] {
+  public func getSubscriptions() async -> [Subscription] {
     let subscriptionModels = await client.getSubscriptionsForFolder(folderId: folderModel.id)
     return subscriptionModels.map { Subscription(client: client, subscriptionModel: $0) }
   }

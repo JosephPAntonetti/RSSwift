@@ -1,6 +1,6 @@
 import Foundation
 
-class Subscription: Feed {
+public class Subscription: Feed {
   private let model: SubscriptionModel
 
   public var url: URL? {

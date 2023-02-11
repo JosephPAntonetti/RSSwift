@@ -1,4 +1,4 @@
-class Feed {
+public class Feed {
 
   let client: RssClient
 
@@ -11,7 +11,7 @@ class Feed {
     self.name = name
   }
 
-  func getArticles() async -> [Article] {
+  public func getArticles() async -> [Article] {
     let articleModels = await client.getArticlesForFeed(feedId: id)
     return articleModels.map({ Article(model: $0) })
   }
