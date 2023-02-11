@@ -1,6 +1,6 @@
 import Foundation
 
-class Article {
+public class Article {
 
   private let model: ArticleModel
 
