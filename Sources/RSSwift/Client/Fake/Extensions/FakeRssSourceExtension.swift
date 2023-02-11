@@ -1,6 +1,6 @@
 extension Source {
 
-  static func fake() -> Source {
+  public static func fake() -> Source {
     return Source(client: FakeRssClient())
   }
 
