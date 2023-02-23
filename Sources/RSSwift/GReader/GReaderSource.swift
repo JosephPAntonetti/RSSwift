@@ -47,17 +47,17 @@ public class GReaderSource: Source {
       startTime = Int(since.timeIntervalSince1970)
     }
 
-    let parameters = GoogleReader.Models.Parameters.GetStreamContentsParameters(
-      count: 100,
-      startTime: startTime,
-      excludeTarget: GoogleReader.Constants.ReadCategory
-    )
-
     var items: [GoogleReader.Models.StreamItem] = []
     var latestTimestamp: Int = 0
     var continuationToken: String? = ""
 
     while continuationToken != nil {
+      let parameters = GoogleReader.Models.Parameters.GetStreamContentsParameters(
+        count: 100,
+        startTime: startTime,
+        excludeTarget: GoogleReader.Constants.ReadCategory,
+        continuation: (continuationToken?.count ?? 0) > 0 ? continuationToken : nil
+      )
 
       let result = await httpClient.get(
         type: GoogleReader.Models.StreamContents.self,
