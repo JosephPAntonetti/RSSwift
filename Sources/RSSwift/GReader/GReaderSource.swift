@@ -42,7 +42,14 @@ public class GReaderSource: Source {
 
   public func getUnreadItems(since: Date?) async -> ([StreamItem], Date?) {
 
+    var startTime: Int? = nil
+    if let since = since {
+      startTime = Int(since.timeIntervalSince1970)
+    }
+
     let parameters = GoogleReader.Models.Parameters.GetStreamContentsParameters(
+      count: 500,
+      startTime: startTime,
       excludeTarget: GoogleReader.Constants.ReadCategory
     )
 
