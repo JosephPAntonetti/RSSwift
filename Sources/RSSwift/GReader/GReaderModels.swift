@@ -37,7 +37,7 @@ public struct GReaderModels {
     public let title: String
     public let description: String
     public let updated: Int
-    public let updatedUsec: Int?
+    public let updatedUsec: String?
     public let items: [StreamItem]
     public let continuation: String?
 
