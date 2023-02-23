@@ -6,14 +6,16 @@ public class GReaderSource: Source {
 
   private let httpClient: HttpClient
 
-  public init(baseURL: String, authToken: String) {
+  public init(baseURL: String, additionalHeaders: [String: String]) {
     self.baseURL = baseURL
     self.httpClient = HttpClient(
       baseURL: baseURL,
       authorizationFunction: {
         url in
         var request = URLRequest(url: url)
-        request.addValue("GoogleLogin auth=\(authToken)", forHTTPHeaderField: "Authorization")
+        for kvp in additionalHeaders {
+          request.addValue(kvp.value, forHTTPHeaderField: kvp.key)
+        }
         return request
       }
     )
