@@ -11,5 +11,6 @@ public struct StreamItem {
     public let canonical : URL?
     public let read : Bool
     public let starred : Bool
+    public let subscriptionId : String?
 
 }

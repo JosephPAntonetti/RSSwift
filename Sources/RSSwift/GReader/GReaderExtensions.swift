@@ -31,7 +31,8 @@ extension StreamItem {
       author: gStreamItem.author,
       canonical: canonical,
       read: read,
-      starred: starred
+      starred: starred,
+      subscriptionId: gStreamItem.origin?.streamId
     )
   }
 }
