@@ -48,26 +48,38 @@ public class GReaderSource: Source {
     }
 
     let parameters = GoogleReader.Models.Parameters.GetStreamContentsParameters(
-      count: 500,
+      count: 100,
       startTime: startTime,
       excludeTarget: GoogleReader.Constants.ReadCategory
     )
 
-    let result = await httpClient.get(
-      type: GoogleReader.Models.StreamContents.self,
-      route:
-        "\(GoogleReader.Constants.StreamContentsRoute)\(GoogleReader.Constants.ReadingListCategory.urlEncode())",
-      queryItems: parameters.queryItems
-    )
+    var items: [GoogleReader.Models.StreamItem] = []
+    var latestTimestamp: Int = 0
+    var continuationToken: String? = ""
 
-    switch result {
-    case .some(let contents):
-      let items = contents.items.map({ StreamItem(gStreamItem: $0) })
-      let timestamp = Date(timeIntervalSince1970: Double(contents.updated))
-      return (items, timestamp)
-    case .none:
-      return ([], nil)
+    while continuationToken != nil {
+
+      let result = await httpClient.get(
+        type: GoogleReader.Models.StreamContents.self,
+        route:
+          "\(GoogleReader.Constants.StreamContentsRoute)\(GoogleReader.Constants.ReadingListCategory.urlEncode())",
+        queryItems: parameters.queryItems
+      )
+
+      switch result {
+      case .some(let contents):
+        items.append(contentsOf: contents.items)
+        latestTimestamp = max(latestTimestamp, contents.updated)
+        continuationToken = contents.continuation
+      case .none:
+        continuationToken = nil
+      }
     }
+
+    return (
+      items.map({ StreamItem(gStreamItem: $0) }),
+      Date(timeIntervalSince1970: Double(latestTimestamp))
+    )
   }
 
   public func getSubscriptions() async -> [Subscription] {
