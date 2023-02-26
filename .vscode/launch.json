@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "ChromeOS On Linux",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/out/Default/chrome",
+            "args": [
+                "--user-data-dir=~/.cros-userdata",
+                "--login-manager",
+                "--remote-debugging-port=2224"
+            ],
+            "preLaunchTask": "01-build_chrome",
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug TestApplication",
+            "program": "${workspaceFolder:RSSwift}/.build/debug/TestApplication",
+            "args": [],
+            "cwd": "${workspaceFolder:RSSwift}",
+            "preLaunchTask": "swift: Build Debug TestApplication"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release TestApplication",
+            "program": "${workspaceFolder:RSSwift}/.build/release/TestApplication",
+            "args": [],
+            "cwd": "${workspaceFolder:RSSwift}",
+            "preLaunchTask": "swift: Build Release TestApplication"
+        }
+    ]
+}
