@@ -1,6 +1,6 @@
 import Foundation
 
-public class GReaderSource: Source {
+public class GReaderRSSProvider : RSSProvider {
 
   private let client: GReaderApiClient
 
@@ -8,7 +8,7 @@ public class GReaderSource: Source {
     client = GReaderApiClient(baseURL: baseURL, headers: headers)
   }
 
-  public func getItemIds(since: Date?, unreadOnly: Bool) async -> [String] {
+  public func getArticleIDs(since: Date?, unreadOnly: Bool) async -> [String] {
     let excludeTarget = unreadOnly ? GReaderConstants.ReadCategory : nil
     let startTime = since?.timeIntervalSince1970 != nil ? Int(since!.timeIntervalSince1970) : nil
 
@@ -41,7 +41,7 @@ public class GReaderSource: Source {
     return items.map({ $0.id })
   }
 
-  public func getItems(since: Date?, unreadOnly: Bool) async -> [StreamItem] {
+  public func getArticles(since: Date?, unreadOnly: Bool) async -> [Article] {
     let excludeTarget = unreadOnly ? GReaderConstants.ReadCategory : nil
     let startTime = since?.timeIntervalSince1970 != nil ? Int(since!.timeIntervalSince1970) : nil
 
@@ -72,7 +72,7 @@ public class GReaderSource: Source {
       continuation = response?.continuation
     }
 
-    return items.map({ $0.toStreamItem() })
+    return items.map({ $0.toArticle() })
   }
 
   public func getSubscriptions() async -> [Subscription] {

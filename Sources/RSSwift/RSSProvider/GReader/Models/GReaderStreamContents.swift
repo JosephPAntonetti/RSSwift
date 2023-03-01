@@ -42,7 +42,7 @@ public struct GReaderStreamContents: Codable {
 
 extension GReaderStreamContents.Item {
 
-  public func toStreamItem() -> StreamItem {
+  public func toArticle() -> Article {
 
     var publishedDate: Date? = nil
     if let publishedTimestamp = published {
@@ -62,7 +62,7 @@ extension GReaderStreamContents.Item {
     let read = categories?.contains(GReaderConstants.ReadCategory) ?? false
     let starred = categories?.contains(GReaderConstants.StarredCategory) ?? false
 
-    return StreamItem(
+    return Article(
       id: id,
       title: title,
       published: publishedDate,
