@@ -17,13 +17,15 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/lukaskubanek/LoremSwiftum.git", from: "2.2.1")
+    .package(url: "https://github.com/groue/GRDB.swift.git", from: "6.8.0"),
+    .package(url: "https://github.com/lukaskubanek/LoremSwiftum.git", from: "2.2.1"),
   ],
   targets: [
     .target(
       name: "RSSwift",
       dependencies: [
-        "LoremSwiftum"
+        "LoremSwiftum",
+        .product(name: "GRDB", package: "GRDB.swift"),
       ]
     ),
     .testTarget(
